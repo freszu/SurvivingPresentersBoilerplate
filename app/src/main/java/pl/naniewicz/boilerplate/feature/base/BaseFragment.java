@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import pl.naniewicz.boilerplate.app.BoilerplateApplication;
 import pl.naniewicz.boilerplate.commons.injection.component.ConfigPersistentComponent;
 import pl.naniewicz.boilerplate.commons.injection.component.DaggerConfigPersistentComponent;
@@ -25,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
     private static final String KEY_FRAGMENT_ID = "key_fragment_id";
     private FragmentComponent fragmentComponent;
     private long fragmentId;
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -55,6 +57,7 @@ public abstract class BaseFragment extends Fragment {
         if (!getActivity().isChangingConfigurations()) {
             componentsMap.remove(fragmentId);
         }
+        unbinder.unbind();
         super.onDestroyView();
     }
 
