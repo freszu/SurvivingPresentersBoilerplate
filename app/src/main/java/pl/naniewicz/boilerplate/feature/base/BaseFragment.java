@@ -17,13 +17,13 @@ import pl.naniewicz.boilerplate.app.BoilerplateApplication;
 import pl.naniewicz.boilerplate.commons.injection.component.ConfigPersistentComponent;
 import pl.naniewicz.boilerplate.commons.injection.component.DaggerConfigPersistentComponent;
 import pl.naniewicz.boilerplate.commons.injection.component.FragmentComponent;
-import pl.naniewicz.boilerplate.commons.injection.module.ActivityModule;
 
 public abstract class BaseFragment extends Fragment {
 
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
     private static final LongSparseArray<ConfigPersistentComponent> componentsMap = new LongSparseArray<>();
     private static final String KEY_FRAGMENT_ID = "key_fragment_id";
+
     private FragmentComponent fragmentComponent;
     private long fragmentId;
     private Unbinder unbinder;
@@ -63,7 +63,7 @@ public abstract class BaseFragment extends Fragment {
 
     private void setupConfigPersistent(Bundle savedInstanceState) {
         setupFragmentId(savedInstanceState);
-        fragmentComponent = retrieveConfigPersistentComponent().fragmentComponent(new ActivityModule(getActivity()));
+        fragmentComponent = retrieveConfigPersistentComponent().fragmentComponent();
     }
 
     private void setupFragmentId(Bundle savedInstanceState) {

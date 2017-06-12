@@ -14,13 +14,13 @@ import pl.naniewicz.boilerplate.app.BoilerplateApplication;
 import pl.naniewicz.boilerplate.commons.injection.component.ActivityComponent;
 import pl.naniewicz.boilerplate.commons.injection.component.ConfigPersistentComponent;
 import pl.naniewicz.boilerplate.commons.injection.component.DaggerConfigPersistentComponent;
-import pl.naniewicz.boilerplate.commons.injection.module.ActivityModule;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
     private static final LongSparseArray<ConfigPersistentComponent> componentsMap = new LongSparseArray<>();
     private static final String KEY_ACTIVITY_ID = "key_activity_id";
+
     private ActivityComponent activityComponent;
     private long activityId;
 
@@ -52,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void setupConfigPersistent(Bundle savedInstanceState) {
         setupActivityId(savedInstanceState);
-        activityComponent = retrieveConfigPersistentComponent().activityComponent(new ActivityModule(this));
+        activityComponent = retrieveConfigPersistentComponent().activityComponent();
     }
 
     private void setupActivityId(Bundle savedInstanceState) {
