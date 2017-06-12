@@ -7,9 +7,9 @@ import javax.inject.Singleton;
 import io.reactivex.Flowable;
 import pl.naniewicz.boilerplate.data.UserSource;
 import pl.naniewicz.boilerplate.data.local.AppDatabase;
+import pl.naniewicz.boilerplate.data.local.LocalStorageModule;
 import pl.naniewicz.boilerplate.data.local.UserCacheSaveDao;
 import pl.naniewicz.boilerplate.data.model.User;
-import pl.naniewicz.boilerplate.data.local.LocalStorageModule;
 import pl.naniewicz.boilerplate.data.remote.NetModule;
 
 @Singleton

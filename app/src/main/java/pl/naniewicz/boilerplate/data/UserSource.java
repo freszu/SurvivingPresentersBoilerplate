@@ -13,6 +13,6 @@ import retrofit2.http.Query;
 public interface UserSource {
 
     @GET("api/")
-    @android.arch.persistence.room.Query("SELECT * FROM user LIMIT :amount OFFSET (SELECT COUNT(*) FROM user)-:amount")
+    @android.arch.persistence.room.Query("SELECT * FROM user LIMIT :amount")
     Flowable<List<User>> getUsersList(@Query("amount") int amount);
 }
