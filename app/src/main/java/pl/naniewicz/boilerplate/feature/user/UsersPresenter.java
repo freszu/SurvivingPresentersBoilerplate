@@ -20,6 +20,13 @@ public class UsersPresenter extends BasePresenter<UserMvpView> {
     private final DataState<List<User>> usersDataState;
     private final GetUsersUseCase getUsersUseCase;
 
+    @Inject
+    public UsersPresenter(DataState<List<User>> usersDataState, GetUsersUseCase getUsersUseCase) {
+        this.usersDataState = usersDataState;
+
+        this.getUsersUseCase = getUsersUseCase;
+    }
+
     @Override
     public void onAttachView(UserMvpView mvpView) {
         super.onAttachView(mvpView);
@@ -34,21 +41,10 @@ public class UsersPresenter extends BasePresenter<UserMvpView> {
         disposables.dispose();
     }
 
-    @Inject
-    public UsersPresenter(DataState<List<User>> usersDataState, GetUsersUseCase getUsersUseCase) {
-        this.usersDataState = usersDataState;
-
-        this.getUsersUseCase = getUsersUseCase;
-    }
-
     public void loadUsers() {
-        disposables.add(
-                getUsersUseCase.execute()
-                        .compose(RxTransformers.applySingleIoSchedulers())
-                        .subscribe(
-                                this::handleUsers,
-                                Timber::e
-                        )
+        disposables.add(getUsersUseCase.execute()
+                .compose(RxTransformers.applySingleIoSchedulers())
+                .subscribe(this::handleUsers, Timber::e)
         );
     }
 
