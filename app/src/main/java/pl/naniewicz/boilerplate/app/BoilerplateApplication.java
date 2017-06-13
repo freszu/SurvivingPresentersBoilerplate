@@ -8,7 +8,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.squareup.leakcanary.LeakCanary;
 
 import pl.naniewicz.boilerplate.BuildConfig;
-import pl.naniewicz.boilerplate.data.remote.NetModule;
 import timber.log.Timber;
 
 public class BoilerplateApplication extends Application {
@@ -23,7 +22,6 @@ public class BoilerplateApplication extends Application {
         if (applicationComponent == null) {
             applicationComponent = DaggerApplicationComponent.builder()
                     .applicationModule(new ApplicationModule(this))
-                    .netModule(new NetModule())
                     .build();
         }
         return applicationComponent;
